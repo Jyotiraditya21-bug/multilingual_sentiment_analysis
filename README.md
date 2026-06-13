@@ -1,8 +1,8 @@
 ---
 title: Multilingual Sentiment Dashboard
 emoji: 🚀
-colorFrom: teal
-colorTo: slate
+colorFrom: gray
+colorTo: blue
 sdk: docker
 app_port: 7860
 pinned: false
