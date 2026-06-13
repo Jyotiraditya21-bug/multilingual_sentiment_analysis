@@ -1,12 +1,4 @@
----
-title: Multilingual Sentiment Dashboard
-emoji: 🚀
-colorFrom: gray
-colorTo: blue
-sdk: docker
-app_port: 7860
-pinned: false
----
+
 
 # Multilingual Sentiment Analysis System
 
