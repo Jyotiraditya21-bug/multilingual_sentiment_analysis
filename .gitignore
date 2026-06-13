@@ -1,0 +1,27 @@
+# Virtual environment
+venv/
+.venv/
+env/
+
+# Python Cache
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Large Model Checkpoints
+model/checkpoints/
+*.safetensors
+*.bin
+*.h5
+
+# Jupyter Notebook Checkpoints
+.ipynb_checkpoints/
+
+# macOS system files
+.DS_Store
+
+# Local application tasks and logs
+.system_generated/
+.tempmediaStorage/
+*.log
