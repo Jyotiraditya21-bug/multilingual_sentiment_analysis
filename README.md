@@ -1,3 +1,13 @@
+---
+title: Multilingual Sentiment Dashboard
+emoji: 🚀
+colorFrom: teal
+colorTo: slate
+sdk: docker
+app_port: 7860
+pinned: false
+---
+
 # Multilingual Sentiment Analysis System
 
 [![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=flat&logo=pytorch&logoColor=white)](https://pytorch.org/)
