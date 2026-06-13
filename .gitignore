@@ -9,7 +9,10 @@ env/
 *.pyo
 *.pyd
 
-# Large Model Checkpoints (handled locally via git exclude)
+# Large Model Checkpoints
+*.safetensors
+*.bin
+*.h5
 
 # Jupyter Notebook Checkpoints
 .ipynb_checkpoints/

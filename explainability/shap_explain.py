@@ -41,11 +41,23 @@ class SentimentExplainer:
         )
         print(f"SentimentExplainer using device: {self.device}")
 
-        # Load tokenizer and model
+        # Load tokenizer
         self.tokenizer = AutoTokenizer.from_pretrained(checkpoint_path)
-        self.model = AutoModelForSequenceClassification.from_pretrained(
-            checkpoint_path
-        )
+
+        # Load model: check if we load from base backbone + classifier head
+        head_path = os.path.join(checkpoint_path, "classifier_head.pt")
+        if os.path.exists(head_path):
+            print(f"Loading base backbone xlm-roberta-base and custom classification head from: {head_path}")
+            self.model = AutoModelForSequenceClassification.from_pretrained(
+                "FacebookAI/xlm-roberta-base", num_labels=3
+            )
+            # Load custom classification head weights
+            self.model.classifier.load_state_dict(torch.load(head_path, map_location=self.device))
+        else:
+            print(f"Loading full model from checkpoint: {checkpoint_path}")
+            self.model = AutoModelForSequenceClassification.from_pretrained(
+                checkpoint_path
+            )
         self.model.to(self.device)
         self.model.eval()
 
