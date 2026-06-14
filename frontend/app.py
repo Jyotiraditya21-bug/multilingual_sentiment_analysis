@@ -71,6 +71,32 @@ def predict_sentiment(text: str, language: str) -> Tuple[Dict[str, float], List[
     # Map language label
     lang_code = "en" if language == "English" else "es"
 
+    # Try direct in-process inference first to bypass loopback HTTP requests (prevents single-process deadlocks)
+    try:
+        from api.main import explainer as local_explainer
+        if local_explainer is not None:
+            print("Running in-process inference (bypassing loopback HTTP request to prevent deadlock)...")
+            explanation = local_explainer.explain(text)
+            label = explanation["label"]
+            confidence = explanation["confidence"]
+            shap_scores = explanation["shap_scores"]
+
+            label_probs = {
+                "negative": 0.0,
+                "neutral": 0.0,
+                "positive": 0.0
+            }
+            label_probs[label] = confidence
+            remaining = 1.0 - confidence
+            other_labels = [k for k in label_probs.keys() if k != label]
+            for ol in other_labels:
+                label_probs[ol] = remaining / len(other_labels)
+
+            highlights = clean_and_map_shap(text, shap_scores)
+            return label_probs, highlights, shap_scores
+    except Exception as e:
+        print(f"In-process inference failed, falling back to HTTP: {e}")
+
     try:
         # Call backend api
         response = requests.post(
