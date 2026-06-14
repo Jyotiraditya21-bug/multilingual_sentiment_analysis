@@ -1,11 +1,4 @@
----
-title: Multilingual Sentiment Analysis
-emoji: 📊
-colorFrom: green
-colorTo: blue
-sdk: docker
-pinned: false
----
+project demo : https://huggingface.co/spaces/jimmy2110/multilingual-sentiment
 
 # Multilingual Sentiment Analysis System
 
