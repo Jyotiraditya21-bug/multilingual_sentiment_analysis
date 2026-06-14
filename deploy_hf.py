@@ -43,6 +43,7 @@ def deploy():
                 "**/*.pyc",
                 "**/*.pyo",
                 "**/__pycache__/**",
+                "model/checkpoints/**",  # Load model from Model Hub instead of Space repo
                 "deploy_hf.py",  # Exclude script to prevent token exposure
             ],
             token=hf_token

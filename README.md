@@ -1,4 +1,11 @@
-
+---
+title: Multilingual Sentiment Analysis
+emoji: 📊
+colorFrom: green
+colorTo: blue
+sdk: docker
+pinned: false
+---
 
 # Multilingual Sentiment Analysis System
 

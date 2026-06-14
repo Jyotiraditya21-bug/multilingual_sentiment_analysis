@@ -10,6 +10,7 @@ env/
 *.pyd
 
 # Large Model Checkpoints
+model/checkpoints/
 *.safetensors
 *.bin
 *.h5

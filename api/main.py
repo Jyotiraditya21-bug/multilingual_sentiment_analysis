@@ -38,6 +38,10 @@ app.add_middleware(
 explainer: Optional[SentimentExplainer] = None
 checkpoint_path = "model/checkpoints/best_model/"
 
+# Fallback to Hugging Face model repository if local checkpoint is not found or incomplete
+if not os.path.exists(checkpoint_path) or not os.path.exists(os.path.join(checkpoint_path, "model.safetensors")):
+    checkpoint_path = "jimmy2110/multilingual-sentiment-model"
+
 
 @app.on_event("startup")
 def startup_event():
@@ -45,7 +49,8 @@ def startup_event():
     global explainer
     print("FastAPI server starting up...")
 
-    if not os.path.exists(checkpoint_path):
+    is_hf_model = "/" in checkpoint_path and not os.path.exists(checkpoint_path)
+    if not is_hf_model and not os.path.exists(checkpoint_path):
         print(
             f"WARNING: Checkpoint path '{checkpoint_path}' does not exist yet. "
             "Please train the model by running 'python model/train.py' before making predictions."
